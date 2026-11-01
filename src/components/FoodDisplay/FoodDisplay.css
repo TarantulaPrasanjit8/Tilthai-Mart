@@ -1,0 +1,26 @@
+.food-display {
+  margin-top: 30px;
+}
+
+.food-display h2 {
+  font-size: max(2vw, 24px);
+  font-weight: 600;
+}
+
+.food-display-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  margin-top: 30px;
+  gap: 30px;
+  row-gap: clamp(2rem 15vw 2rem);
+}
+
+.visual-hidden-but-readable-by-seo {
+  display: none;
+}
+
+@media (max-width: 400px) {
+  .food-display-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Fallback to 1 column only if screen width is microscopic */
+  }
+}
