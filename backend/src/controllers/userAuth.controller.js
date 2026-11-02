@@ -31,7 +31,7 @@ const authLoginController = async (req, res) => {
         res.cookie('adminToken', adminUserToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'none',
+            sameSite: 'lax',
             maxAge: 1 * 24 * 60 * 60 * 1000
         })
         res.status(200).json({
