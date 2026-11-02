@@ -1,0 +1,218 @@
+:root {
+  /* Added modern fallback palette token structures matching your dark forest green theme */
+  --dark: #0f1813;           /* Deeper dark slate-green for luxury premium feel */
+  --primary: #b87325;        /* Vibrant, highly readable modern branch brand tone */
+  --gray: #6b776f;
+  --text-muted: #a3b2a8;     /* Modern low-contrast grey-green readable text */
+  --border-tint: rgba(255, 255, 255, 0.06);
+}
+
+footer {
+  color: #ffffff;
+  background-color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Fluid responsive padding utilizing modern CSS clamps */
+  padding: clamp(40px, 8vw, 80px) clamp(16px, 6vw, 8vw) 30px clamp(16px, 6vw, 8vw);
+  margin-top: clamp(60px, 10vw, 120px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle modern decorative top accent border line gradient */
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.footer-content {
+  width: 100%;
+  max-width: 1280px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* Tablet Layout Optimization */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
+  }
+  .footer-content-left {
+    grid-column: span 2;
+    max-width: 540px;
+  }
+}
+
+/* Desktop Widescreen Layout Configuration */
+@media (min-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 2.2fr 1fr 1fr;
+    gap: 64px;
+  }
+}
+
+.footer-content-left,
+.footer-content-right,
+.footer-content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.footer-content-left img {
+  width: 100%;
+  max-width: 220px; /* Modern cleaner logo presence limits */
+  height: auto;
+  object-fit: contain;
+  filter: brightness(1) contrast(1);
+}
+
+.footer-logo {
+  background: linear-gradient(135deg, #dfebea, #67f09b);
+  border-radius: 5px;
+}
+
+.footer-content p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  text-align: justify; /* Changed from rigid justify to modern readable left alignment */
+  margin: 0;
+  max-height: 250px;
+  overflow-y: hidden;
+}
+
+footer h2 {
+  color: #ffffff; /* Headings remain crisp white */
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em; /* Refined geometric tech style letter spacing */
+  position: relative;
+  margin: 0;
+  padding-bottom: 6px;
+}
+
+/* Sleek bottom border bar indicator under column titles */
+footer h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  border-radius: 2px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer li {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s ease;
+}
+
+/* Elegant micro-interaction link shift effect on hover */
+footer li:hover {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.footer-social-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* Modern social media circular container wraps */
+.footer-social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-tint);
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-social-icons img {
+  width: 18px; /* Correctly scaled for micro icons inside rings */
+  height: 18px;
+  object-fit: contain;
+  filter: invert(1); /* Automates icon conversion to white code blocks safely */
+  transition: transform 0.3s ease;
+}
+
+.footer-social-icons a:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(45, 138, 93, 0.25);
+}
+
+.footer-social-icons a:hover img {
+  transform: scale(1.1);
+}
+
+footer hr {
+  width: 100%;
+  max-width: 1280px;
+  height: 1px;
+  margin: 40px 0 20px 0;
+  background-color: var(--border-tint); /* Replaced heavy gray rule with thin translucent line */
+  border: none;
+}
+
+.footer-copyright {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+@media (min-width: 640px) {
+  .footer-copyright {
+    flex-direction: row;
+    justify-content: space-between; /* Splitting legalities neatly across desktop row spaces */
+  }
+}
+
+.footer-copyright span {
+  color: var(--text-muted);
+}
+
+.footer-copyright-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-copyright-link:hover {
+  color: #ffffff;
+}

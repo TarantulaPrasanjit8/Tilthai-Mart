@@ -1,0 +1,234 @@
+/* --- Zomato-Inspired Modern Layout & Grid --- */
+
+/* 1. Parent Layout Wrapper */
+.food-list-container {
+  display: grid;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: #f8f9fa; /* Soft contrast background */
+}
+
+/* 2. Responsive Breakpoints (Zomato 2-Column Mobile Focus) */
+
+/* Small Devices (Mobile): Strictly 2 Columns */
+@media (min-width: 450px) {
+  .food-list-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px; /* Tight, native app-like spacing */
+    padding: 8px;
+  }
+}
+
+/* Medium Devices (Tablets, min 768px): 3 Columns */
+@media (min-width: 768px) {
+  .food-list-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    padding: 16px;
+  }
+}
+
+/* Large Devices (Desktops, min 1024px): 4 Columns */
+@media (min-width: 1024px) {
+  .food-list-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+/* --- Card Base Styles --- */
+.food-item {
+  width: 100%;
+  border-radius: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  /* Premium, lightweight soft shadows */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.food-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Premium Image Presentation --- */
+.food-item-img-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1.1 / 1; /* Squarish, content-first layout popular in food apps */
+  background-color: #f1f5f9;
+}
+
+.food-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.food-item:hover .food-item-img {
+  transform: scale(1.04);
+}
+
+/* --- Zomato Style Badge & Floating Actions --- */
+/* Tip: Put a small dot or icon here for veg/non-veg flags */
+.food-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  padding: 2px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 10px;
+  font-family: 'Italic', sans-serif;
+  letter-spacing: 0.5px;
+  background: rgba(32, 238, 60, 0.95);
+  color:#ffffff;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.food-item-img-container .add {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.food-item-img-container .add:hover {
+  transform: scale(1.08);
+  background-color: #e23744; /* Zomato Active Red Brand Palette */
+}
+
+.food-item-img-container .add:hover svg, 
+.food-item-img-container .add:hover i {
+  color: #ffffff !important;
+}
+
+.food-item-counter {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e23744;
+  box-shadow: 0 4px 10px rgba(226, 55, 68, 0.15);
+}
+
+/* --- Card Content & Hierarchy --- */
+.food-item-info {
+  padding: 12px 14px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-transform: uppercase;
+}
+
+.food-item-name-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.food-item-name-rating p {
+  font-size: 14px;
+  font-weight: 700;
+  color: #070707; /* Bold app text dark color */
+  margin: 0;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Zomato-style Green Rating Chip */
+.rating-chip {
+  background-color: #126325;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.food-item-desc {
+  color: #696969;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 4px 0 10px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- Footer Metrics --- */
+.item-marchant {
+  color: #828282;
+  font-size: 10px;
+  text-transform: capitalize;
+  margin-top: auto; 
+  padding-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-marchant span {
+  font-weight: 500;
+  color: #565252;
+  font-size: 12px;
+}
+
+.food-item-price {
+  color: #218b4e;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-top: 2px;
+}
+
+/* --- Ultra Narrow Screens Fix --- */
+@media (max-width: 350px) {
+  .food-list-container {
+    grid-template-columns: 1fr; /* Fallback to 1 column only if screen width is microscopic */
+  }
+}
+
+/* --- Accessibility & State management --- */
+.disabled-div {
+  pointer-events: none;
+  filter: grayscale(100%);
+  opacity: 0.4;
+}
