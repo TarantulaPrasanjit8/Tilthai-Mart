@@ -8,8 +8,8 @@ const app = express();
 
 // enabling cors for same origin policy
 const allowedOrigins = [
-  'https://tilthaimart.vercel.app', 
-  'https://tilthai-mart-admin.vercel.app'
+  'https://vercel.app', 
+  'https://vercel.app'
 ];
 app.use(cors({
   origin: function (origin, callback) {
