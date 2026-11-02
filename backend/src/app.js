@@ -9,7 +9,9 @@ const app = express();
 // enabling cors for same origin policy
 app.use(cors({
   origin: ['https://tilthaimart.vercel.app', 'https://tilthai-mart-admin.vercel.app'],
-  credentials: true                // Allows cookies to be accepted/sent
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 
