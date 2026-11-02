@@ -30,7 +30,7 @@ const authLoginController = async (req, res) => {
         const adminUserToken = jwt.sign({username, password}, process.env.JWT_SECRET_KEY, {expiresIn: '1d'});
         res.cookie('adminToken', adminUserToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: true,
             sameSite: 'lax',
             maxAge: 1 * 24 * 60 * 60 * 1000
         })
