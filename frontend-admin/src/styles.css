@@ -1,0 +1,590 @@
+:root {
+  --bg: #edf0e9;
+  --ink: #1d2a22;
+  --muted: #6b776f;
+  --line: #d9dfd6;
+  --card: #fff;
+  --brand: #1f5f43;
+  --good: #2f7d4f;
+  --bad: #c4372c;
+  --saffron: #e8a317;
+  --sidebar-w: 260px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+.muted {
+  color: var(--muted);
+  margin: 0.2rem 0;
+}
+
+.error {
+  color: var(--bad);
+  font-weight: 600;
+}
+
+/* --- Core Layout Engine --- */
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+/* --- Sidebar (Mobile Header Layout) --- */
+.side {
+  background-color: #1b5e40;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  position: relative;
+  z-index: 100;
+}
+
+.side h1 {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* Added navigation links container wrapper for safety */
+.side-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.side a {
+  display: inline-block;
+  padding: 8px 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.side a.active {
+  background: #fff;
+  color: var(--brand);
+}
+
+.side a:hover:not(.active) {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.side .btn.danger {
+  background-color: #a53f3f;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.side .btn.danger:hover {
+  background-color: #b91c1c;
+}
+
+/* --- Main Content Area --- */
+.main {
+  flex-grow: 1;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .head {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* --- Filter Component Scrollbar Configuration --- */
+.status-filter-bar {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 24px;
+  padding-bottom: 2px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.status-filter-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.status-filter-bar::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 4px;
+}
+
+.status-tab {
+  background: none;
+  border: none;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  margin-bottom: -2px;
+  flex-shrink: 0;
+}
+
+.status-tab:hover {
+  color: #1f2937;
+}
+
+.status-tab.active { color: #1b5e40; border-bottom-color: #1b5e40; }
+.status-tab.active-accepted { color: #2563eb; border-bottom-color: #2563eb; }
+.status-tab.active-done { color: #d97706; border-bottom-color: #d97706; }
+.status-tab.active-delivered { color: #059669; border-bottom-color: #059669; }
+.status-tab.active-cancelled { color: #dc2626; border-bottom-color: #dc2626; }
+
+/* --- Responsive Grids --- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.product img, .noimg {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.6rem;
+}
+
+.noimg {
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+/* --- Order Cards & Receipts Layout --- */
+.card, .order-card {
+  background: var(--card);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 576px) {
+  .card, .order-card {
+    padding: 24px;
+  }
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.order-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 400px) {
+  .order-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.order-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.order-price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #059669;
+  background-color: #ecfdf5;
+  padding: 4px 12px;
+  border-radius: 8px;
+  align-self: flex-start;
+}
+
+.order-body {
+  margin-bottom: 20px;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.875rem;
+  margin-bottom: 12px;
+}
+
+.meta-label {
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.meta-value {
+  background: #f3f4f6;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #374151;
+}
+
+.items-box {
+  background: #f9fafb;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.receipt-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #ffffff;
+  gap: 12px;
+}
+
+.receipt-item:hover {
+  background-color: #f9fafb;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-transform: capitalize;
+}
+
+.merchant-name {
+  font-size: 12px;
+  color: #737373;
+  font-weight: 400;
+}
+
+.qnty-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #262626;
+  font-variant-numeric: tabular-nums;
+  background-color: #f5f5f5;
+  padding: 4px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* --- Action Controls & Button Groups --- */
+.order-actions, .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .order-actions, .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.15s ease;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 480px) {
+  .btn {
+    flex: 1;
+    width: auto;
+  }
+}
+
+.btn-accept { background-color: #059669; color: white; border: none; }
+.btn-accept:hover { background-color: #047857; }
+.btn-deliver { background-color: #f3f4f6; color: #9ca3af; border: none; }
+.btn-cancel { background-color: transparent; color: #dc2626; border: 1px solid #fca5a5; }
+.btn-cancel:hover { background-color: #fef2f2; }
+
+.btn:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--saffron);
+  outline-offset: 1px;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+.btn.good { background: var(--good); color: #fff; border-color: var(--good); }
+.btn.danger { background: #fff; color: var(--bad); border-color: var(--bad); }
+
+/* --- Tracking Timelines --- */
+.track {
+  list-style: none;
+  display: flex;
+  margin: 1.5rem 0;
+  padding: 0;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.track li {
+  flex: 1;
+  position: relative;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  min-width: 80px;
+}
+
+.track li i {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 0 auto 0.4rem;
+  border-radius: 50%;
+  background: var(--line);
+  position: relative;
+  z-index: 1;
+}
+
+.track li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--line);
+}
+
+.track li.done {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.track li.done i {
+  background: var(--good);
+}
+
+.track li.done:not(:last-child):has(+ .done)::after {
+  background: var(--good);
+}
+
+.track.cancelled {
+  display: block;
+  color: var(--bad);
+  font-weight: 600;
+  padding: 0.5rem;
+  border: 1px dashed var(--bad);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* --- Forms & Auth Framework --- */
+.form label, .login label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
+input, textarea {
+  font: inherit;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.login-wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.login {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.login h1 {
+  color: var(--brand);
+  margin-bottom: 0.3rem;
+}
+
+.login .btn {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.status-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.badge-accepted { background-color: #eff6ff; color: #2563eb; }
+.badge-done { background-color: #fffbeb; color: #d97706; }
+.badge-delivered { background-color: #ecfdf5; color: #059669; }
+.badge-cancelled { background-color: #fef2f2; color: #dc2626; }
+
+/* ==========================================================================
+   DESKTOP RESPONSIVE BREAKPOINT
+   ========================================================================== */
+@media (min-width: 992px) {
+  .shell {
+    flex-direction: row;
+  }
+
+  /* Structural side configuration triggers on widescreen desktop viewports */
+  .side {
+    position: fixed;
+    top: 0;
+left: 0;
+bottom: 0;
+width: var(--sidebar-w);
+height: 100vh;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+padding: 32px 24px;
+gap: 0.4rem;
+}
+.side h1 {
+font-size: 1.75rem;
+margin-bottom: 40px;
+margin-top: 0;
+}
+.side-nav {
+flex-direction: column;
+width: 100%;
+gap: 0;
+}
+.side a {
+display: block;
+width: 100%;
+padding: 12px 20px;
+margin-bottom: 12px;
+font-size: 1rem;
+}
+.side .btn.danger {
+position: absolute;
+bottom: 2rem;
+left: 24px;
+right: 24px;
+width: calc(100% - 48px);
+margin: 0;
+padding: 12px;
+text-align: center;
+}
+/* Displaces layout correctly for fixed navigation panel */
+.main {
+margin-left: var(--sidebar-w);
+padding: 40px;
+width: calc(100% - var(--sidebar-w));
+max-width: 1400px;
+}
+}
