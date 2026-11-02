@@ -12,7 +12,7 @@ export default function MyOrders() {
   useEffect(()=>{
     const fetch_my_orders = async()=>{
       try{
-        const my_orders = await axios.get(`http://localhost:5000/api/orders/user/my-orders`, {withCredentials: true})
+        const my_orders = await axios.get(`https://tilthai-mart.onrender.com/api/orders/user/my-orders`, {withCredentials: true})
         if(!my_orders){
           <p>Error to load my orders</p>
         }else{
