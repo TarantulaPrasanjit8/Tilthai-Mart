@@ -4,10 +4,39 @@ import { useCart } from '../../context/StoreContext';
 
 // Mock list of data to filter from
 const DATA_ITEMS = [
-  'Apple', 'Banana', 'Blueberry', 'Blackberry', 'Cherry', 
-  'Coconut', 'Date', 'Dragonfruit', 'Grape', 'Grapefruit', 
-  'Kiwi', 'Lemon', 'Lime', 'Mango', 'Orange', 'Papaya', 
-  'Peach', 'Pear', 'Pineapple', 'Strawberry', 'Watermelon', 'biriyani', 'wall paper'
+  // Fruits & Grocery Variations
+  'Apple', 'Apples', 'Red Apple', 'Green Apple',
+  'Banana', 'Bananas', 'Ripe Banana',
+  'Blueberry', 'Blueberries', 'Berries',
+  'Blackberry', 'Blackberries',
+  'Cherry', 'Cherries',
+  'Coconut', 'Coconuts', 'Nariyal', 'Coconut Water',
+  'Date', 'Dates', 'Khajur',
+  'Dragonfruit', 'Dragon fruit',
+  'Grape', 'Grapes', 'Green Grapes', 'Black Grapes',
+  'Grapefruit', 'Grapefruits',
+  'Kiwi', 'Kiwis',
+  'Lemon', 'Lemons', 'Lemonade',
+  'Lime', 'Limes', 'Lime Juice',
+  'Mango', 'Mangoes', 'Alphonso', 'Aam', 'Mango Shake',
+  'Orange', 'Oranges', 'Santra', 'Orange Juice',
+  'Papaya', 'Papayas',
+  'Peach', 'Peaches',
+  'Pear', 'Pears',
+  'Pineapple', 'Pineapples',
+  'Strawberry', 'Strawberries', 'Strawberry Ice Cream',
+  'Watermelon', 'Watermelons', 'Tarbooz',
+
+  // Food & Ready Meals
+  'biriyani', 'biryani', 'chicken biryani', 'mutton biryani', 'veg biryani',
+
+  // Wallpaper & Decor
+  'wall paper', 'wallpaper', 'wall coverings', 'wall stickers',
+
+  // Raw Meat & Fish (Expanded for your specific categories)
+  'raw chicken', 'chicken breast', 'chicken meat', 
+  'raw mutton', 'mutton chops', 'goat meat',
+  'raw fish', 'fresh fish', 'salmon', 'tuna', 'seafood'
 ];
 
 export default function SearchSuggestion() {
