@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuthStatus = async () => {
       try {
         // Backend verifies the HTTP-only refresh cookie here
-        const response = await axios.get('http://localhost:5000/api/auth/user/protected', {withCredentials: true});
+        const response = await axios.get('https://tilthai-mart.onrender.com/api/auth/user/protected', {withCredentials: true});
         if(!response.data.user){
           // console.log('Session Expired! Please Login.') // e.g., { id: 1, name: 'Alice' }
           return;
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   // 2. Login function
   const login = async (credentials) => {
     try{
-    const response = await axios.post('http://localhost:5000/api/auth/user/login', credentials, {withCredentials:true});
+    const response = await axios.post('https://tilthai-mart.onrender.com/api/auth/user/login', credentials, {withCredentials:true});
     setUser(response.data.user); 
     return response.data.user;
     }catch(err){
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   // 3. Logout function
   const logout = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/user/logout', {}, {withCredentials:true});
+      const res = await axios.post('https://tilthai-mart.onrender.com/api/auth/user/logout', {}, {withCredentials:true});
       if(!res){
         console.log('logout not working')
         return;
