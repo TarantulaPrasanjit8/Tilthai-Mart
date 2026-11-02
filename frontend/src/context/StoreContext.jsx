@@ -31,7 +31,7 @@ export const StoreContextProvider = ({children}) => {
   // get all  the products
   const getAllProducts = async () => {
     try{
-      const res = await axios.get("http://localhost:5000/api/products/all-products");
+      const res = await axios.get("https://tilthai-mart.onrender.com/api/products/all-products");
       return res.data.allProducts;
     }catch(err){
       console.log(err);
