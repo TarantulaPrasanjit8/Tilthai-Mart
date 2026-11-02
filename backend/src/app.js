@@ -8,7 +8,7 @@ const app = express();
 
 // enabling cors for same origin policy
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174'], // Your exact React frontend URL
+  origin: ['https://tilthaimart.vercel.app', 'https://tilthai-mart-admin.vercel.app'],
   credentials: true                // Allows cookies to be accepted/sent
 }));
 
