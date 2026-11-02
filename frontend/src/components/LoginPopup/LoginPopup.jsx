@@ -15,7 +15,7 @@ const LoginPopup = ({ setShowLogin}) => {
   const handleSignUp = async (e)=>{
     e.preventDefault();
     try{
-      const res = await axios.post('http://localhost:5000/api/auth/user/register', 
+      const res = await axios.post('https://tilthai-mart.onrender.com/api/auth/user/register', 
         {
           full_name: loginSignUpData.full_name, 
           username: loginSignUpData.username, 
