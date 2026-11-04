@@ -7,12 +7,22 @@ const path = require('path');
 const app = express();
 
 // enabling cors for same origin policy
+const allowedOrigins = [
+  'https://vercel.app', 
+  'https://vercel.app'
+];
 app.use(cors({
-  origin: ['https://vercel.app', 'https://vercel.app'],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+  origin: function (origin, callback) {
+    // 1. Allow requests with no origin (like mobile apps, Postman, or server-to-server)
+    if (!origin) return callback(null, true);
+    
+    // 2. Check if the incoming origin is in our allowed list
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true); // Origin is allowed
+    } else {
+      callback(new Error('Not allowed by CORS')); // Reject unauthorized domains
+    }
+  },
 
 
 /**
