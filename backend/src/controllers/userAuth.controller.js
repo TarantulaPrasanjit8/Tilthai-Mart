@@ -32,7 +32,7 @@ const authLoginController = async (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: 'lax',
-            domain: '.tilthaimart.in'
+            domain: '.tilthaimart.in',
             maxAge: 1 * 24 * 60 * 60 * 1000
         })
         res.status(200).json({
