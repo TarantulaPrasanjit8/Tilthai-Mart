@@ -23,6 +23,10 @@ app.use(cors({
       callback(new Error('Not allowed by CORS')); // Reject unauthorized domains
     }
   },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 
 
 /**
