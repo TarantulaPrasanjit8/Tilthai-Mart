@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://railway.app*"
-    },
-    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
