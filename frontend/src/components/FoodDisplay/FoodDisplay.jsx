@@ -14,7 +14,7 @@ const FoodDisplay = ({ category }) => {
     const fetchProducts = async () => {
       try{
         setLoading(true);
-        const res = await axios.get("/api/products/all-products");
+        const res = await axios.get("https://tilthai-mart-production.up.railway.app/api/products/all-products");
         setProducts(res.data.allProducts);
       }catch(err){
         console.log(err);
