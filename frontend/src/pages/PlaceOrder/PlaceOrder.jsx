@@ -89,7 +89,7 @@ const PlaceOrder = () => {
     setOrderStatus('processing');
     e.preventDefault()
     try{
-      const res = await axios.post("https://tilthai-mart.onrender.com/api/orders/user/create-order", orderData, {withCredentials: true});
+      const res = await axios.post("https://tilthai-mart-production.up.railway.app/api/orders/user/create-order", orderData, {withCredentials: true});
       console.log(res.data)
       if(res.data.order_id){
         setCartItems({})
