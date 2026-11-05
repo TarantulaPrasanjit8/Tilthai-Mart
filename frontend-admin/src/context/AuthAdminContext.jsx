@@ -14,7 +14,7 @@ export const AuthAdminProvider = ({ children }) => {
     const checkAuthAdminStatus = async () => {
       try {
         // Backend verifies the HTTP-only refresh cookie here
-        const response = await axios.get('/api/auth/authCheck', {withCredentials: true});
+        const response = await axios.get('https://api.tilthaimart.in/api/auth/authCheck', {withCredentials: true});
         if(!response.data.user){
             
           console.log('Session Expired! Please Login.') // e.g., { id: 1, name: 'Alice' }
@@ -47,7 +47,7 @@ export const AuthAdminProvider = ({ children }) => {
   // 2. Login function
   const admin_login = async (credentials) => {
     try{
-    const response = await axios.post('/api/auth/login', credentials, {withCredentials:true});
+    const response = await axios.post('https://api.tilthaimart.in/api/auth/login', credentials, {withCredentials:true});
     setUser(response); 
     return response;
     }catch(err){
@@ -60,7 +60,7 @@ export const AuthAdminProvider = ({ children }) => {
   // 3. Logout function
   const admin_logout = async () => {
     try {
-      const res = await axios.post('/api/auth/logout', {}, {withCredentials:true});
+      const res = await axios.post('https://api.tilthaimart.in/api/auth/logout', {}, {withCredentials:true});
       if(!res){
         console.log('logout not working')
         return;
