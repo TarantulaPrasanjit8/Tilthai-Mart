@@ -1,98 +1,241 @@
+/* Uses your global --primary, --dark and --gray if defined; fallbacks keep it working standalone */
 .cart {
+  --c-ink: var(--dark, #1c1c1e);
+  --c-muted: var(--gray, #6e6e73);
+  --c-brand: var(--primary, #ff5a1f);
+  --c-line: #ececec;
+  --c-surface: #ffffff;
+  --c-soft: #f6f6f4;
+  --c-row-cols: 88px minmax(0, 1.8fr) 1fr 1fr 1fr 44px;
+
   margin-top: 100px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 40px;
+  align-items: start;
+  color: var(--c-ink);
 }
 
+/* when the user is logged out only the items column renders */
+.cart .cart-items:only-child {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Page heading ---------- */
+.cart-page-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cart-page-head h1 {
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.cart-count {
+  color: var(--c-muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Column labels + rows share one grid ---------- */
 .cart-items-title {
   display: grid;
-  grid-template-columns: 0.8fr 1.5fr 1fr 1fr 1fr 0.5fr;
+  grid-template-columns: var(--c-row-cols);
   align-items: center;
-  color: var(--gray);
-  font-size: max(1vw, 12px);
-  font-weight: bold;
-  text-transform: capitalize;
+  column-gap: 16px;
 }
 
-.cart-items-title:hover{
-  background-color: #e0dddd;
-  cursor: pointer;
+.cart-heading {
+  padding: 0 16px 12px;
+  color: var(--c-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.cart-heading p:nth-child(n + 3) {
+  text-align: center;
+}
+
+.cart-heading p:last-child {
+  text-align: right;
 }
 
 .cart-items-item {
-  margin: 10px 0;
-  color: var(--dark);
+  margin: 12px 0 0;
+  padding: 14px 16px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: 16px;
+  font-size: 0.98rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.cart-items-item img {
-  position: relative;
-  width: 80%;
-  border-radius: 8px;
-  overflow: hidden;
-  aspect-ratio: 3/3;
+.cart-items-item:hover {
+  border-color: #dcdcdc;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
-.cart hr {
-  height: 1px;
-  background-color: #e2e2e2;
-  border: none;
+.cart-item-img {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--c-soft);
+  display: block;
 }
 
+.cart-item-name {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.cart-item-price,
+.cart-item-qty,
+.cart-item-total {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-item-price {
+  color: var(--c-muted);
+}
+
+.cart-item-qty {
+  justify-self: center;
+  min-width: 40px;
+  padding: 6px 12px;
+  background: var(--c-soft);
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.cart-item-total {
+  font-weight: 700;
+}
+
+/* ---------- Remove button ---------- */
 .cart-items-item .Remove {
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
-  margin: auto;
-  width: 50%;
+  transition: background-color 0.15s ease;
 }
 
+.cart-items-item .Remove img {
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
+}
+
+.cart-items-item .Remove:hover {
+  background: #fdecea;
+}
+
+.cart-items-item .Remove:hover img {
+  opacity: 1;
+}
+
+/* ---------- Empty / logged-out ---------- */
 .NoItems {
-  padding: 10px 0;
-  color: var(--gray);
+  margin-top: 16px;
+  padding: 56px 20px;
+  text-align: center;
+  color: var(--c-muted);
+  background: var(--c-soft);
+  border: 1px dashed #d9d9d6;
+  border-radius: 16px;
 }
 
+/* ---------- Order summary ---------- */
 .cart-bottom {
-  margin-top: 80px;
+  position: sticky;
+  top: 100px;
   display: flex;
-  justify-content: space-between;
-  gap: max(12vw, 20px);
+  flex-direction: column;
+  gap: 24px;
 }
 
 .cart-total {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 24px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.cart-total h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cart-total-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .cart-total-details {
   display: flex;
   justify-content: space-between;
-  color: var(--gray);
+  color: var(--c-muted);
+  font-variant-numeric: tabular-nums;
 }
 
-.cart-total hr {
-  margin: 10px 0;
+.cart-grand-total {
+  margin-top: 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--c-line);
+  color: var(--c-ink);
+  font-size: 1.15rem;
 }
 
 .cart-total button {
+  width: 100%;
+  padding: 14px 0;
   border: none;
+  border-radius: 12px;
+  background-color: var(--c-brand);
   color: #fff;
+  font-size: 1rem;
   font-weight: 600;
-  background-color: var(--primary);
-  width: max(15vw, 200px);
-  padding: 12px 0px;
-  border-radius: 4px;
   cursor: pointer;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.cart-total button:hover:not(:disabled) {
+  filter: brightness(0.93);
+}
+
+.cart-total button:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .cart-total button:disabled {
-  opacity: 50%;
-  cursor: auto;
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
-.cart-promocode {
-  flex: 1;
-}
-
-.card-promocode p {
-  color: var(--gray);
+/* ---------- Promo code (markup is commented out in the JSX; styles kept ready) ---------- */
+.cart-promocode p {
+  color: var(--c-muted);
 }
 
 .cart-promocode-input {
@@ -100,40 +243,117 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #eaeaea;
-  border-radius: 4px;
+  background-color: var(--c-soft);
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .cart-promocode-input input {
+  flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
-  padding-left: 10px;
+  padding: 12px 14px;
 }
 
 .cart-promocode-input button {
-  width: max(10vw, 150px);
-  padding: 12px 5px;
-  background-color: var(--dark);
+  padding: 12px 20px;
+  background-color: var(--c-ink);
   border: none;
   color: #fff;
-  border-radius: 4px;
   cursor: pointer;
 }
 
+/* ---------- Keyboard focus ---------- */
+.cart button:focus-visible,
+.cart-promocode-input input:focus-visible {
+  outline: 2px solid var(--c-brand);
+  outline-offset: 2px;
+}
+
+/* ---------- Tablet: stack summary under items ---------- */
+@media (max-width: 960px) {
+  .cart {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .cart-bottom {
+    position: static;
+  }
+}
+
+/* ---------- Mobile: each row becomes a compact card ---------- */
 @media (max-width: 750px) {
-  .cart-items-item img {
-    border-radius: 4px;
+  .cart {
+    margin-top: 80px;
+  }
+
+  .cart-heading {
+    display: none;
+  }
+
+  .cart-items-item {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "img name  remove"
+      "img price price"
+      "img qty   total";
+    row-gap: 6px;
+    column-gap: 14px;
+    padding: 12px;
+  }
+
+  .cart-item-img {
+    grid-area: img;
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+  }
+
+  .cart-item-name {
+    grid-area: name;
+  }
+
+  .cart-item-price {
+    grid-area: price;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+
+  .cart-item-qty {
+    grid-area: qty;
+    justify-self: start;
+    padding: 4px 12px;
+    font-size: 0.9rem;
+  }
+
+  .cart-item-qty::before {
+    content: "Qty ";
+    font-weight: 400;
+    color: var(--c-muted);
+  }
+
+  .cart-item-total {
+    grid-area: total;
+    text-align: right;
   }
 
   .cart-items-item .Remove {
-    width: 80%;
-  }
-  .cart-bottom {
-    flex-direction: column-reverse;
+    grid-area: remove;
+    align-self: start;
   }
 
-  .cart-promocode {
-    justify-content: start;
+  .cart-total {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart *,
+  .cart *::before {
+    transition: none !important;
   }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 import './MyOrders.css'; // Importing the core CSS file
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
@@ -8,11 +9,17 @@ export default function MyOrders() {
   const [loading, setLoading] = useState(true);
   const [my_order, setMyOrder] = useState(null);
   const {isAuthenticated} = useAuth();
+  const navigate = useNavigate();
 
   useEffect(()=>{
     const fetch_my_orders = async()=>{
       try{
+<<<<<<< HEAD
         const my_orders = await axios.get(`https://tilthai-mart.onrender.com/api/orders/user/my-orders`, {withCredentials: true})
+=======
+        setLoading(true)
+        const my_orders = await axios.get(`http://localhost:5000/api/orders/user/my-orders`, {withCredentials: true})
+>>>>>>> 848f4f6 (updating the color scheme for the MyOrder component to use a more vibrant green for active tabs and adjusting text colors for better visibility.)
         if(!my_orders){
           <p>Error to load my orders</p>
         }else{
@@ -26,14 +33,18 @@ export default function MyOrders() {
     }
     if(isAuthenticated){
       fetch_my_orders()
+    }else{
+      setMyOrder(null);
+      setLoading(false);
+      navigate('/')
     }
     
   }, []);
 
-  if(loading) return <LoadingSpinner/>;
+  if(loading) return <p>Loading...</p>;
 
   const filteredOrders = my_order.filter(order => {
-    if (activeTab === "All") return true;
+    if (activeTab === "all") return true;
     return order.status === activeTab;
   });
   
@@ -49,17 +60,18 @@ export default function MyOrders() {
 
         {/* Tab Filters */}
         <div className="tabs-navigation">
-          {["All", "Processing", "Delivered", "Cancelled"].map((tab) => (
+          {["All", "Done", "Accepted", "Delivered", "Cancelled"].map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`tab-btn ${activeTab === tab ? "active" : ""}`}
+              onClick={() => setActiveTab(tab.toLowerCase())}
+              className={`tab-btn ${activeTab === tab.toLowerCase() ? "active" : ""}`}
             >
-              {tab}
+              {tab == 'Done' ? 'Processing' : tab}
             </button>
           ))}
         </div>
-
+        
+        {/* {loading && <LoadingSpinner />} */}
         {/* Orders Stack */}
         <main className="orders-list">
           {filteredOrders.length === 0 ? (

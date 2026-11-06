@@ -4,14 +4,30 @@ import "./LoginPopup.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
+import LoadingSpinner from "../LoadingSpiner/LoadingSpiner";
 
 const LoginPopup = ({ setShowLogin}) => {
   const [currentState, setCurrentState] = useState("Login");
   const [loginSignUpData, setLoginSignUpData] = useState({full_name: "",username: "", phone: "", password: ""});
   const [message, setMessage]= useState('');
   const redirectPage = useNavigate();
+  const [loging, setLoging] = useState(false);
   const {isAuthenticated, login} = useAuth();
 
+
+  // closing the login popup while cliking outside the popup
+
+  const handleClose =(e) =>{
+    if(e.target.className === 'login-popup'){
+      setShowLogin(false);
+    }
+  }
+  // preventing the popup from closing when clicking inside the popup
+  const handleOnPopupClick = (e) => {
+    e.stopPropagation();
+  }
+
+  // sign up function using axios
   const handleSignUp = async (e)=>{
     e.preventDefault();
     try{
@@ -39,30 +55,35 @@ const LoginPopup = ({ setShowLogin}) => {
       setLoginSignUpData({})
     }
   }
+
   // handle login 
   const handleLogin = async (e)=>{
     e.preventDefault();
     try{
       // sending login request using axios
+      setLoging(true);
       const res = await login({username: loginSignUpData.username, password: loginSignUpData.password})
       // console.log(res);
       if(res){
         setMessage('Login successful');
+        setLoging(false);
         // setShowLogin(false);
       }else{
         setMessage('Login failed! Wrong Credentials.');
+        setLoging(false);
         redirectPage('/')
       }
     
   }catch(err){
     console.log(err);
     setMessage('An error occurred during login');
+    setLoging(false);
   }
 }
   return (
     <>
-    <div className="login-popup" >
-      <form className="login-popup-container">
+    <div className="login-popup" onClick={handleClose}>
+      <form className="login-popup-container" onClick={handleOnPopupClick}>
         <div className="login-popup-title">
           <h2>{currentState}</h2>
           <img
@@ -71,6 +92,7 @@ const LoginPopup = ({ setShowLogin}) => {
             onClick={() => setShowLogin(false)}
           />
         </div>
+
         {!isAuthenticated? (<>
         <div className="login-popup-inputs">
           {currentState == 'Login' ? (
@@ -87,6 +109,11 @@ const LoginPopup = ({ setShowLogin}) => {
 
           <input type="password" placeholder="Password" value={loginSignUpData.password ? loginSignUpData.password : ''} required onChange={(e)=>{setLoginSignUpData({...loginSignUpData, password: e.target.value})}}/>
         </div>
+        {loging ? (
+          <div className="login-spiner">
+            <LoadingSpinner/>
+          </div>
+        ) : (<></>)}
         <button onClick={currentState ==="Sign up"? handleSignUp : handleLogin}>
           {currentState === "Sign up" ? "Create Account" : "Login"}
         </button>

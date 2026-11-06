@@ -2,10 +2,12 @@
   position: fixed;
   top: 2rem;
   z-index: 1;
-  height: 100%;
-  width: 100%;
-  background-color: #00000090;
-  display: grid;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 
 .login-popup-container {
@@ -45,6 +47,22 @@
   border: 1px solid #c9c9c9;
   padding: 10px;
   border-radius: 4px;
+}
+
+.login-spiner{
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+}
+.login-spiner .spinner-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .login-popup-container button {
