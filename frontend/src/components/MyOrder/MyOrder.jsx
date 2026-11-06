@@ -14,13 +14,9 @@ export default function MyOrders() {
   useEffect(()=>{
     const fetch_my_orders = async()=>{
       try{
-<<<<<<< HEAD
-        const my_orders = await axios.get(`https://tilthai-mart.onrender.com/api/orders/user/my-orders`, {withCredentials: true})
-=======
+        const my_orders = await axios.get(`https://api.tilthaimart.in/api/orders/user/my-orders`, {withCredentials: true})
         setLoading(true)
-        const my_orders = await axios.get(`http://localhost:5000/api/orders/user/my-orders`, {withCredentials: true})
->>>>>>> 848f4f6 (updating the color scheme for the MyOrder component to use a more vibrant green for active tabs and adjusting text colors for better visibility.)
-        if(!my_orders){
+       if(!my_orders){
           <p>Error to load my orders</p>
         }else{
           setLoading(false);
