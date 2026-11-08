@@ -13,7 +13,7 @@
   
   /* Status Colors */
   --green-text: #15803d;
-  --green-bg: #5ef88c;
+  --green-bg: #8dfdaf;
   --green-border: #bbf7d0;
   --blue-text: #1d4ed8;
   --blue-bg: #eff6ff;
@@ -47,13 +47,13 @@
 .orders-header h1 {
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(  --bg-main);
+  color: var(  --text-primary);
   margin: 0 0 0.5rem 0;
 }
 
 .orders-header p {
   font-size: 0.875rem;
-  color: var( --bg-main);
+  color: var( --text-secondary);
   margin: 0;
   text-align: justify;
 }
@@ -78,7 +78,7 @@
   padding: 0.75rem 0.25rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--border-light);
+  color: var(--text-secondary);
   cursor: pointer;
   white-space: nowrap;
   border-bottom: 2px solid transparent;
@@ -90,8 +90,8 @@
 }
 
 .tab-btn.active {
-  color: var(--green-bg);
-  border-bottom-color: var(--green-bg);
+  color: #288158;
+  border-bottom-color: #4ade80;
 }
 
 /* --- ORDERS MAIN WRAPPER & CARD --- */
