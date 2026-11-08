@@ -17,7 +17,7 @@ const PlaceOrder = () => {
   /**
    * Zipcode validation check
    */
-  const zipcodeList = ["799001", "799002", "799003", "799004", "799005", "799006", "799007", "799008"];
+  const zipcodeList = ["799260"];
   const [zipcode, setZipcode] = useState("")
   const [isZipcodeValid, setIsZipcodeValid] = useState(true);
 
