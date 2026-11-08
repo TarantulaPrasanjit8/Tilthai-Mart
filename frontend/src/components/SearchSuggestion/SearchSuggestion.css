@@ -13,7 +13,7 @@
 /* Wrapper context: Center alignment & adaptive spacing */
 .search-container {
   position: fixed;
-  top: 3.5rem;
+  top: 4rem;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
