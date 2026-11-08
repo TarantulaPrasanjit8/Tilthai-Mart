@@ -1,5 +1,6 @@
 .carousel-wrapper {
   position: relative;
+  top: 3rem;
   width: 100%;
   box-sizing: border-box;
 }
@@ -164,6 +165,9 @@
 
 
 @media (max-width: 768px) {
+   .carousel-wrapper {
+    top: 3rem;
+  }
   .banner-card {
     padding: 24px 36px;
     min-height: 100%;
@@ -174,6 +178,9 @@
 }
 
 @media (max-width: 480px) {
+  .carousel-wrapper {
+    top: 1.5rem;
+  }
   .header-contents {
     max-width: 100%;
     padding: 0 12px;
