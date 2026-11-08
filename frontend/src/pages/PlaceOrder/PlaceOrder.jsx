@@ -132,6 +132,7 @@ const PlaceOrder = () => {
       <form className="place-order" onSubmit={(e)=>{proceedOrder(e)}}>
         <div className="place-order-left">
           <h2 className="title">Delivery information</h2>
+          <h5>Delivery available in Dharmanagar & Panisagar only</h5>
 
           <label className="field">
             <span>Street</span>
