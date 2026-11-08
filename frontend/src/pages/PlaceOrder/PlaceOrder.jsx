@@ -21,7 +21,7 @@ const PlaceOrder = () => {
   /**
    * Zipcode validation check
    */
-  const zipcodeList = ["799001", "799002", "799003", "799004", "799005", "799006", "799007", "799008"];
+  const zipcodeList = ["799260", "799250"];
   const [zipcode, setZipcode] = useState("")
   const [isZipcodeValid, setIsZipcodeValid] = useState(true);
 
@@ -93,7 +93,7 @@ const PlaceOrder = () => {
     setOrderStatus('processing');
     e.preventDefault()
     try{
-      const res = await axios.post("http://localhost:5000/api/orders/user/create-order", orderData, {withCredentials: true});
+      const res = await axios.post("https://api.tilthaimart.in/api/orders/user/create-order", orderData, {withCredentials: true});
       console.log(res.data)
       if(res.data.order_id){
         setCartItems({})
