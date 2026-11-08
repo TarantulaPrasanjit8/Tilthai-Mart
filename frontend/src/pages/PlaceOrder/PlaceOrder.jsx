@@ -1,4 +1,4 @@
-// import React from "react";
+import React, {useEffect} from "react";
 import "./PlaceOrder.css";
 import { deliveryFee } from "../Cart/Cart";
 import { useNavigate } from "react-router-dom";
@@ -13,11 +13,15 @@ const PlaceOrder = () => {
   const {isAuthenticated, user} = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+  // Scroll to the top when the component mounts
+  window.scrollTo(0, 0);
+}, []);
 
   /**
    * Zipcode validation check
    */
-  const zipcodeList = ["799260", "799250"];
+  const zipcodeList = ["799001", "799002", "799003", "799004", "799005", "799006", "799007", "799008"];
   const [zipcode, setZipcode] = useState("")
   const [isZipcodeValid, setIsZipcodeValid] = useState(true);
 
@@ -89,7 +93,7 @@ const PlaceOrder = () => {
     setOrderStatus('processing');
     e.preventDefault()
     try{
-      const res = await axios.post("https://api.tilthaimart.in/api/orders/user/create-order", orderData, {withCredentials: true});
+      const res = await axios.post("http://localhost:5000/api/orders/user/create-order", orderData, {withCredentials: true});
       console.log(res.data)
       if(res.data.order_id){
         setCartItems({})
@@ -110,48 +114,78 @@ const PlaceOrder = () => {
     navigate('/');          // Redirect user to home page routing route
   };
 
+  if(!isAuthenticated){
+    return navigate('/');
+  }
+
   return (
     <>
     {isAuthenticated? (
-      <>
-      <button className="GoBack" onClick={() => navigate("/cart")}>
-        ⬅️Go Back to Cart Page
-      </button>
+      <div className="po-page">
+      <div className="po-head">
+        <button type="button" className="GoBack" onClick={() => navigate("/cart")}>
+          ← Back to cart
+        </button>
+        <h1>Checkout</h1>
+      </div>
 
       <form className="place-order" onSubmit={(e)=>{proceedOrder(e)}}>
         <div className="place-order-left">
-          <h2 className="title">Delivery Information</h2>
-          <input type="text" placeholder="Street" onChange={(e)=>{setAddress({...address, street: e.target.value})}}/>
+          <h2 className="title">Delivery information</h2>
+
+          <label className="field">
+            <span>Street</span>
+            <input type="text" placeholder="Street" onChange={(e)=>{setAddress({...address, street: e.target.value})}}/>
+          </label>
+
           <div className="multi-fields">
-            <input type="text" placeholder="City" onChange={(e)=>{setAddress({...address, city: e.target.value})}}/>
-            <input type="text" placeholder="State" value="Tripura" readOnly />
+            <label className="field">
+              <span>City</span>
+              <input type="text" placeholder="City" onChange={(e)=>{setAddress({...address, city: e.target.value})}}/>
+            </label>
+            <label className="field">
+              <span>State</span>
+              <input type="text" placeholder="State" value="Tripura" readOnly />
+            </label>
           </div>
+
           <div className="multi-fields">
-            <input type="text" placeholder="Zip Code"  onChange={handleInputChange} onBlur={(e)=>{postalValidation(e)}} value={zipcode} style={{color: isZipcodeValid? "green" : "red"}}/>
-            <input type="text" placeholder="Country" value="India" readOnly />
+            <label className="field">
+              <span>Zip code</span>
+              <input type="text" placeholder="Zip Code"  onChange={handleInputChange} onBlur={(e)=>{postalValidation(e)}} value={zipcode} style={{color: isZipcodeValid? "green" : "red"}}/>
+            </label>
+            <label className="field">
+              <span>Country</span>
+              <input type="text" placeholder="Country" value="India" readOnly />
+            </label>
           </div>
           <p className={`zipcode-validation ${isZipcodeValid ? "valid" : "invalid"}`} style={{color: isZipcodeValid ? "green" : "red", display: isZipcodeValid ? "none" : "block"}}>
             {isZipcodeValid ? " " : "Invalid Zipcode"}
           </p>
-          <input type="text" placeholder="Landmark" onChange={(e)=>{setAddress({...address, landmark: e.target.value})}}/>
-          <input type="text" placeholder="Phone" onChange={(e)=>{setAddress({...address, phone: e.target.value})}} required/>
+
+          <label className="field">
+            <span>Landmark</span>
+            <input type="text" placeholder="Landmark" onChange={(e)=>{setAddress({...address, landmark: e.target.value})}}/>
+          </label>
+          <label className="field">
+            <span>Phone</span>
+            <input type="text" placeholder="Phone" onChange={(e)=>{setAddress({...address, phone: e.target.value})}} required/>
+          </label>
         </div>
 
         <div className="place-order-right">
-          <div className="cart-total">
-            <h2 className="title">Cart Total</h2>
-            <div>
-              <div className="cart-total-details">
+          <div className="po-summary">
+            <h2 className="title">Order summary</h2>
+            <div className="po-rows">
+              <div className="po-row">
                 <p>Subtotal</p>
                 <p>₹{getTotalCartAmount()}</p>
               </div>
-              <hr />
-              <div className="cart-total-details">
-                <p>Delivery Free</p>
+              <div className="po-row">
+                <p>Delivery fee</p>
                 <p>₹{getTotalCartAmount() === 0 ? 0 : deliveryFee}</p>
               </div>
-              <hr />
-              <div className="cart-total-details">
+              <div className="po-row po-grand">
                 <b>Total</b>
                 <b>
                   ₹
@@ -161,8 +195,8 @@ const PlaceOrder = () => {
                 </b>
               </div>
             </div>
-            <button type="Submit" disabled={getTotalCartAmount() === 0}>
-              Proceed Order
+            <button type="submit" disabled={getTotalCartAmount() === 0}>
+              Place order
             </button>
           </div>
           {/* Render the structural overlay component */}
@@ -173,8 +207,7 @@ const PlaceOrder = () => {
         />
         </div>
       </form>
-    </> ) : <></>}
-
+    </div> ) : <></>}
     </>
   );
 };
