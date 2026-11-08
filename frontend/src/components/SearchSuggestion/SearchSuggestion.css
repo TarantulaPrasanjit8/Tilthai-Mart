@@ -1,68 +1,114 @@
-/* Wrapper setting a controlled context for absolute positioning */
-.search-container {
-  position: relative;
-  top: 3rem;
-  width: 95%;
-  /* max-width: 400px; Adjust size based on layout preferences */
-  margin: 20px auto;
-  font-family: Arial, sans-serif;
+/* Base custom properties for easy theme management */
+:root {
+  --search-bg: #ffffff;
+  --search-border: #e2e8f0;
+  --search-text-primary: #1e293b;
+  --search-text-muted: #64748b;
+  --search-accent: #3b82f6; /* Modern Blue */
+  --search-accent-light: #eff6ff;
+  --search-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --radius-modern: 12px;
 }
 
-/* Styled input bar */
+/* Wrapper context: Center alignment & adaptive spacing */
+.search-container {
+  position: fixed;
+  top: 3.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  /* max-width: 540px; Constrains desktop size without breaking layout */
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  z-index: 1000; /* Standard high index layering */
+  box-sizing: border-box;
+}
+
+/* Styled Modern Input Bar */
 .search-input {
   width: 100%;
-  padding: 5px 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px 18px;
+  font-size: 16px; /* Prevents iOS auto-zoom behavior on focus */
+  color: var(--search-text-primary);
+  background-color: var(--search-bg);
+  border: 1px solid var(--search-border);
+  border-radius: var(--radius-modern);
   box-sizing: border-box;
   outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease-in-out;
 }
 
+/* Micro-interaction on Focus */
 .search-input:focus {
-  border-color: #007bff;
+  border-color: var(--search-accent);
+  box-shadow: 0 0 0 4px var(--search-accent-light), 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-/* Suggestion box spanning full width right below the input wrapper */
+/* Suggestion Box: Floating panel effect */
 .suggestion-box {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px); /* Clean floating structural gap */
   left: 0;
   right: 0;
-  z-index: 10;
-  margin: 4px 0 0 0;
-  padding: 0;
-  background-color: #ffffff; /* Solid white background as requested */
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  z-index: 1010;
+  margin: 0;
+  padding: 6px; /* Inner spacing wrapper */
+  background-color: var(--search-bg);
+  border: 1px solid var(--search-border);
+  border-radius: var(--radius-modern);
   list-style: none;
-  max-height: 250px;
+  max-height: 280px;
   overflow-y: auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--search-shadow);
+  box-sizing: border-box;
+  
+  /* Smooth scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
 }
 
-/* Individual list entries */
+/* Webkit Scrollbar Tuning */
+.suggestion-box::-webkit-scrollbar {
+  width: 6px;
+}
+.suggestion-box::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* Individual modern list entries */
 .suggestion-item {
-  padding: 10px 16px;
+  padding: 10px 14px;
   font-size: 15px;
-  color: #333;
+  color: var(--search-text-primary);
   cursor: pointer;
   text-align: left;
+  border-radius: calc(var(--radius-modern) - 4px); /* Fluid rounded internal nest */
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
 }
 
-/* Clean UI feedback on cursor hover */
+/* Clean feedback on cursor hover or keyboard navigation focus */
 .suggestion-item:hover {
-  background-color: #f5f5f5;
+  background-color: var(--search-accent-light);
+  color: var(--search-accent);
+  font-weight: 500;
 }
 
-@media (max-width: 770px) {
-  .search-container{
-    top: 2.3rem;
+/* Responsive Overrides for Mobile Viewports */
+@media (max-width: 640px) {
+  .search-container {
+    top: 2.9rem;
+    width: 92%; /* Maximizes available mobile horizontal space safely */
   }
-}
+  
+  .search-input {
+    padding: 10px 14px; /* Slightly tighter touch target padding */
+  }
 
-@media (max-width: 600px) {
-  .search-container{
-    top: 2rem;
+  .suggestion-box {
+    max-height: 220px; /* Prevents overflow from covering small screens */
   }
 }
