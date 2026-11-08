@@ -53,6 +53,7 @@
   flex-direction: column;
   box-sizing: border-box;
   position: relative;
+  cursor: pointer;
 }
 
 .food-item:hover {
