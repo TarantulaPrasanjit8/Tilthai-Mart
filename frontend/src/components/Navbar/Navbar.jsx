@@ -70,7 +70,7 @@ const Navbar = ({ setShowLogin }) => {
           <>
             <button onClick={()=>  handleLogout()}>Logout</button>
             <Link to='/my-orders'>
-              <button onClick={()=> setMenu("")}>My Order</button>
+              <button>My Orders</button>
             </Link>
           </>
         ) : (
