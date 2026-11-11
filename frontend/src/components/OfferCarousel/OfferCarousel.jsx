@@ -54,7 +54,7 @@ const BANNERS = [
     title: 'Craving Fast Food or Local Bengali Cuisine? 🍛🍚',
     discount: 'HOT RESTAURANT FOOD DELIVERED',
     tags: 'Partnered with top-rated kitchens across North Tripura',
-    bgGradient: 'linear-gradient(135deg, #FF416C, #FF4B2B)', // Foodie Red
+    bgGradient: 'linear-gradient(135deg, #FF416C, #ffc62b)', // Foodie Red
     image: assets.cookedFood || '🍛'
   }
 ];
