@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
 export default function MyOrders() {
-  const [activeTab, setActiveTab] = useState("All");
+  const [activeTab, setActiveTab] = useState("all");
   const [loading, setLoading] = useState(true);
   const [my_order, setMyOrder] = useState(null);
   const {isAuthenticated} = useAuth();
