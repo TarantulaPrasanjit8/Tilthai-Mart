@@ -6,7 +6,7 @@ const BANNERS = [
   {
     id: 1,
     badge: 'DIWALI SPECIAL • 3 DAYS ONLY',
-    title: 'Festival of Lights Feast in Dharmanagar 🪔',
+    title: 'Festival of Lights Feast in Dharmanagar & Panisagar 🪔',
     discount: 'FLAT 40% OFF',
     tags: 'Valid across all premium local sweets & family restaurants',
     bgGradient: 'linear-gradient(135deg, #e65c00, #F9D423)', // Festive Marigold Orange
@@ -15,8 +15,8 @@ const BANNERS = [
   {
     id: 2,
     badge: 'GRAND NEW LAUNCH',
-    title: 'Tilthai Mart is Now Live in Panisagar! 🚀',
-    discount: 'FREE DELIVERY ON ALL ORDERS',
+    title: 'Tilthai Mart is Now Live in Panisagar & Dharmanagar! 🚀',
+    discount: 'ORDER NOW',
     tags: 'Order cooked food, groceries, & fresh farm items instantly',
     bgGradient: 'linear-gradient(135deg, #1f5f43, #0f1813)', // Tilthai Forest Green
     image: assets.appLaunch || '🛵'
@@ -25,7 +25,7 @@ const BANNERS = [
     id: 3,
     badge: 'FRESH FARM PRODUCE',
     title: 'Online Vegetable Market Dharmanagar 🥬',
-    discount: 'UP TO 30% OFF TODAY',
+    discount: 'UP TO 30% OFF',
     tags: 'Handpicked crisp green veggies, potatoes & seasonal fruits',
     bgGradient: 'linear-gradient(135deg, #11998e, #38ef7d)', // Crisp Veggie Green
     image: assets.freshVeg || '🥗'
@@ -51,11 +51,11 @@ const BANNERS = [
   {
     id: 6,
     badge: 'ANNOUNCEMENT',
-    title: 'Craving Fast Food or Local Bengali Cuisine? 🍔',
+    title: 'Craving Fast Food or Local Bengali Cuisine? 🍛🍚',
     discount: 'HOT RESTAURANT FOOD DELIVERED',
     tags: 'Partnered with top-rated kitchens across North Tripura',
     bgGradient: 'linear-gradient(135deg, #FF416C, #FF4B2B)', // Foodie Red
-    image: assets.cookedFood || '🍕'
+    image: assets.cookedFood || '🍛'
   }
 ];
 
