@@ -86,8 +86,8 @@ const PlaceOrder = () => {
     itemsData:  itemsData
   }
 
-  // console.log(orderData)
-
+  
+// order proceedings
   const [orderStatus, setOrderStatus] = useState('idle');
   const proceedOrder = async (e)=>{
     setOrderStatus('processing');
@@ -95,7 +95,7 @@ const PlaceOrder = () => {
     try{
       const res = await axios.post("https://api.tilthaimart.in/api/orders/user/create-order", orderData, {withCredentials: true});
       console.log(res.data)
-      if(res.data.order_id){
+      if(res.data.message){
         setCartItems({})
         console.log(res.data)
         setOrderStatus('success');
@@ -104,14 +104,14 @@ const PlaceOrder = () => {
       }
     }catch(err){
       setOrderStatus('error');
-      console.log(`response from backend ${err}`)
+      // console.log(`response from backend ${err}`)
     }
   };
 
   const handleRedirectHome = () => {
     setOrderStatus('idle'); // Clear modal state
     localStorage.clear('cartItems');
-    navigate('/');          // Redirect user to home page routing route
+    navigate('/my-orders');          // Redirect user to home page routing route
   };
 
   if(!isAuthenticated){
